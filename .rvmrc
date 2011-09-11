@@ -1,0 +1,3 @@
+rvm use jruby
+rvm gemset create wordcram
+rvm gemset use wordcram
