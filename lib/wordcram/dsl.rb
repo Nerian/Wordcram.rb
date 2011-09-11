@@ -1,10 +1,5 @@
-module Dsl 
-  def wordcram_core 
-    Java.wordCram  
-  end  
+require 'dsl/sources'
 
-  def hello
-    puts 'hello!'
-  end   
-
+module Dsl  
+  include Sources
 end

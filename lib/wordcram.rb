@@ -3,7 +3,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'java'              
 require 'rubygems'   
 
-gem 'ruby-processing'
+gem 'ruby-processing'   
+require 'ruby-processing' 
 
 # Wordcram dependencies
 require '../vendor/WordCram.jar'

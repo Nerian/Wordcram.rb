@@ -8,7 +8,10 @@ class Sketch < Processing::App
   def setup    
     size 350, 350
     
-    Wordcram.new(self).from(:text_string =>"This is a wicked wordcram test, some words should be doubled doubled be be").draw_all()
+    Wordcram.new(self) do |options|
+      options.from(:text_string =>"This is a wicked wordcram test, some words should be doubled doubled be be")
+      options.draw_all
+    end
   end
   
   def draw
