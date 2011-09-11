@@ -47,29 +47,47 @@ http://wordcram.org/
 Create awesome word clouds!              
                                        
 <img width='700px' src='http://wordcram.files.wordpress.com/2011/03/wordcram-4th-copy.png'></img>
+
+
+
+## What works right now
+       
+``` ruby       
+
+require 'wordcram'   
+                           
+Processing::App::SKETCH_PATH = '.'
+class Sketch < Processing::App
+  
+  def setup    
+    size 350, 350
+    
+    Wordcram.new(self) do |options|    
+
+		# Just one one these. It is planned to be able to set many sources in the future.
+		options.from(:web_url => 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
+		options.from(:html_string => '<html>...</html>')
+		options.from(:html_file => 'html_page.html')
+		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
+		options.from(:text_file => 'text_file.txt')
+				
+		options.draw_all
+    end
+  end  
+end     
+
+Sketch.new       
+
+```
                 
 
-## Code example
+## Planned DSL
    
 ``` ruby
-require 'wordcram'
+require 'wordcram'  
 
-WordCram.design do  
-  from(web: 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
-  from(html: '<html>...</html>')
-  from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
-  from(file: 'text_file.txt')
-   
-  with_colors('#000000', '#777777', '#ff0000')
-  with_fonts("LiberationSans")
-  sized_by_weight(mix_size: 1, max_size: 200)
-  with_word_padding(1)
-  angled_at(0)     
- 
-  with_placer(new WordPlacer(){})
- 
-  with_placer do |scene|   
-    scene[:word]
+myplacer = WordCram.placer do |scene| 
+	scene[:word]
     scene[:wordIndex] 
     scene[:wordsCount] 
     scene[:wordImageWidth]      
@@ -83,13 +101,27 @@ WordCram.design do
     word_width = scene[:wordImageWidth]
     word_height = scene[:wordImageHeight] 
 
-    xScatter = (1-word.weight);
-    x = map ( random (-xScatter, xScatter), -1, 1, 30, field_width - word_width - 30);
-    y = (1-pow(word.weight, 0.25)) * (field_height - word_height) + 30;  
+    # Your placement algorithm:
+	# xScatter = (1-word.weight);
+    # x = map ( random (-xScatter, xScatter), -1, 1, 30, field_width - word_width - 30);
+    # y = (1-pow(word.weight, 0.25)) * (field_height - word_height) + 30;  
    
-    {x, y}
-  end
+    {x, y}	
+end
+
+WordCram.new(self) do |options|
+	options.from(web: 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
+	options.from(html: '<html>...</html>')
+	options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
+	options.from(file: 'text_file.txt')
+   
+	options.with_colors('#000000', '#777777', '#ff0000')
+	options.with_fonts("LiberationSans")
+	options.sized_by_weight(mix_size: 1, max_size: 200)
+	options.with_word_padding(1)
+	options.angled_at(0)           
+	options.with_placer(myplacer)
      
-  save_to('output.tiff')  
+	options.save_to('output.tiff')  
 end
 ```
