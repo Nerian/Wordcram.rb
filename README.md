@@ -74,9 +74,9 @@ class Sketch < Processing::App
   end                                                                                                               
 end     
 
-Sketch.new       
+Sketch.new
 
-``` ruby                                 
+```       
 
 All modifiers are accessible as instance variables of the class Wordcram. You can use all the modifiers using the `options` variable that you get in the block.   
 
