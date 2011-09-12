@@ -10,7 +10,10 @@ class Sketch < Processing::App
     
     Wordcram.new(self) do |options|
       options.from(:text_string =>"This is a wicked wordcram test, some words should be doubled doubled be be")
-      options.draw_all
+      #options.with_color(color(255, 0, 0))
+      options.with_colors(color(255, 0, 0), color(0, 255, 0)) 
+      options.draw_all()
+      
     end
   end
   

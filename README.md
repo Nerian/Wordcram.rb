@@ -115,11 +115,17 @@ WordCram.new(self) do |options|
 	options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
 	options.from(file: 'text_file.txt')
    
-	options.with_colors('#000000', '#777777', '#ff0000')
-	options.with_fonts("LiberationSans")
+	options.with_color(color(255, 0, 0))	
+	options.with_colors(color(255, 0, 0), color(0, 255, 0))
+	
+	options.with_fonts("LiberationSans")	
+	
 	options.sized_by_weight(mix_size: 1, max_size: 200)
+	
 	options.with_word_padding(1)
+	
 	options.angled_at(0)           
+	
 	options.with_placer(myplacer)
      
 	options.save_to('output.tiff')  
