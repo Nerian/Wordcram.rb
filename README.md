@@ -82,7 +82,21 @@ All modifiers are accessible as instance variables of the class Wordcram. You ca
 
 ### Development 
 
-If you want to try out the features you can run the file `spec/dsl_block_spec.rb` and uncomment the features that you want.
+``` bash
+git clone git@github.com:Nerian/s9-e1.git
+cd s9-e1.git/
+bundle install
+git submodule init
+git submodule update
+```
+
+If you want to try out the features you can run the file `spec/dsl_block_spec.rb` and uncomment the features that you want. Then run then file:
+
+``` bash
+jruby spec/dsl_block_spec.rb
+```
+
+
 
 ### Sources   
 
