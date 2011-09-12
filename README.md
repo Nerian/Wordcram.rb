@@ -121,7 +121,8 @@ WordCram.new(self) do |options|
 	options.with_fonts("LiberationSans", "TimesNewRoman")
 	options.with_font("LiberationSans")	
 	
-	options.sized_by_weight(mix_size: 1, max_size: 200)
+	options.sized_by_weight(mix: 1, max: 30)
+	options.sized_by_rank(mix: 1, max: 30)
 	
 	options.with_word_padding(1)
 	
