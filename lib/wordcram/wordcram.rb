@@ -1,7 +1,4 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'dsl'
-require 'placer'  
+require_relative 'dsl'
 
 # This is the main interface. The API that most users are going to use.
 

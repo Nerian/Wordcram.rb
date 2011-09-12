@@ -3,3 +3,4 @@ desired_dsl.rb
 samples
 dirty.rb
 .rvmrc
+spec/sample.rb

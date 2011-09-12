@@ -90,13 +90,12 @@ git submodule init
 git submodule update
 ```
 
-If you want to try out the features you can run the file `spec/dsl_block_spec.rb` and uncomment the features that you want. Then run then file:
+Rename the file `spec/sample.rb.example` to `spec/sample.rb``and uncomment the lines that you want to test.
 
 ``` bash
-jruby spec/dsl_block_spec.rb
+cp spec/sample.rb.example spec/sample.rb
+jruby spec/sample.rb
 ```
-
-
 
 ### Sources   
 
