@@ -124,7 +124,7 @@ WordCram.new(self) do |options|
 	options.sized_by_weight(mix: 1, max: 30)
 	options.sized_by_rank(mix: 1, max: 30)
 	
-	options.with_word_padding(1)
+	options.with_word_padding(10)
 	
 	options.angled_at(0)           
 	

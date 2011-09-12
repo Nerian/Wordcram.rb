@@ -15,7 +15,8 @@ class Sketch < Processing::App
       #options.with_fonts("LiberationSans")
      
       #options.sized_by_weight({:mix => 30, :max => 35})
-      options.sized_by_rank({:mix => 30, :max => 35})
+      #options.sized_by_rank({:mix => 30, :max => 35})
+      options.with_word_padding(10)
       
       options.draw_all()      
     end
