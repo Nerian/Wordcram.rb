@@ -1,4 +1,5 @@
 require_relative '../lib/wordcram'   
+#require 'wordcram' # install the gem first.   
                            
 Processing::App::SKETCH_PATH = '.'
 class Sketch < Processing::App
