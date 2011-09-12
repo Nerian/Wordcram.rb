@@ -16,7 +16,9 @@ class Sketch < Processing::App
      
       #options.sized_by_weight({:mix => 30, :max => 35})
       #options.sized_by_rank({:mix => 30, :max => 35})
-      options.with_word_padding(10)
+      #options.with_word_padding(10)
+      #options.angled_at(70)
+      options.angled_between(70, 90)
       
       options.draw_all()      
     end
