@@ -4,6 +4,7 @@ require 'dsl/font'
 require 'dsl/sizer'
 require 'dsl/padding'
 require 'dsl/angler'
+require 'dsl/case'
 
 module Dsl  
   include Sources
@@ -12,4 +13,5 @@ module Dsl
   include Sizer
   include Padding
   include Angler
+  include Case
 end

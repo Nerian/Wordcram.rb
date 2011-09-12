@@ -127,7 +127,11 @@ WordCram.new(self) do |options|
 	options.with_word_padding(10)
 	
 	options.angled_at(0)
-	options.angledBetween(3.5, 80.5)           
+	options.angledBetween(3.5, 80.5) 
+	
+	options.case(:upper)
+    options.case(:lower)
+    options.case(:default)
 	
 	options.with_placer(myplacer)
      
