@@ -35,13 +35,13 @@ class Sketch < Processing::App
       #  PVector.new(x,y)        
       #end
       
-      options.with_placer(:horizontal_line)
-      options.with_placer(:center_clump)
-      options.with_placer(:horiz_band_anchored_left)
-      options.with_placer(:swirl)
-      options.with_placer(:upper_left)
-      options.with_placer(:wave)
-      options.with_placer(your_own_placer)             
+      #options.with_placer(:horizontal_line)
+      #options.with_placer(:center_clump)
+      #options.with_placer(:horiz_band_anchored_left)
+      #options.with_placer(:swirl)
+      #options.with_placer(:upper_left)
+      #options.with_placer(:wave)
+      #options.with_placer(your_own_placer)             
       
       options.draw_all()      
     end

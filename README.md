@@ -51,7 +51,7 @@ Create awesome word clouds!
 # How to create a Word Cloud
 
 
-## The basic model
+## The basic canvas
 
 The word cloud is made of a __list of words__, a __canvas__ where these words are drawn and __modifiers__.
 
@@ -106,8 +106,8 @@ options.with_font("LiberationSans")
 ### Ranking the words
 
 ``` ruby
-options.sized_by_weight(mix: 1, max: 30)
-options.sized_by_rank(mix: 1, max: 30)
+options.sized_by_weight({mix: 1, max: 30})
+options.sized_by_rank({mix: 1, max: 30})
 ```                                
 
 ### Padding
