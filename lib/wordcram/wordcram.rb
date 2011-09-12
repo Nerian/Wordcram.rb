@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'dsl'
+require 'placer'  
 
 class Wordcram  
   include Dsl
@@ -13,7 +14,6 @@ class Wordcram
   
   def draw_all()  
     @wordcram.draw_all()    
-  end
+  end   
                                                     
-end                    
-
+end

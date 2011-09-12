@@ -47,11 +47,16 @@ http://wordcram.org/
 Create awesome word clouds!              
                                        
 <img width='700px' src='http://wordcram.files.wordpress.com/2011/03/wordcram-4th-copy.png'></img>
+ 
+# How to create a Word Cloud
 
 
+## The basic model
 
-## What works right now
-       
+The word cloud is made of a __list of words__, a __canvas__ where these words are drawn and __modifiers__.
+
+This is the simplest word cloud. It takes as a source of words a string.
+         
 ``` ruby       
 
 require 'wordcram'   
@@ -61,80 +66,110 @@ class Sketch < Processing::App
   
   def setup    
     size 350, 350
-    
-    Wordcram.new(self) do |options|    
-
-		# Just one one these. It is planned to be able to set many sources in the future.
-		options.from(:web_url => 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
-		options.from(:html_string => '<html>...</html>')
-		options.from(:html_file => 'html_page.html')
-		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
-		options.from(:text_file => 'text_file.txt')
-				
-		options.draw_all
-    end
-  end  
+    wordcram = Wordcram.new(self) do |options|    
+		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    						
+    end     
+                                                                                                        
+	wordcram.draw_all
+  end                                                                                                               
 end     
 
 Sketch.new       
 
+``` ruby                                 
+
+All modifiers are accessible as instance variables of the class Wordcram. You can use all the modifiers using the `options` variable that you get in the block.   
+
+### Sources   
+
+``` ruby 
+options.from(web: 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
+options.from(html: '<html>...</html>')
+options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
+options.from(file: 'text_file.txt')
+```        
+
+### Colors
+
+``` ruby  
+options.with_color(color(255, 0, 0))	
+options.with_colors(color(255, 0, 0), color(0, 255, 0))
+```   
+
+### Fonts    
+
+``` ruby   
+options.with_fonts("LiberationSans", "TimesNewRoman")
+options.with_font("LiberationSans")
+```            
+
+### Ranking the words
+
+``` ruby
+options.sized_by_weight(mix: 1, max: 30)
+options.sized_by_rank(mix: 1, max: 30)
+```                                
+
+### Padding
+
+``` ruby
+options.with_word_padding(10) 
 ```
                 
+### Angle
 
-## Planned DSL
-   
 ``` ruby
-require 'wordcram'  
+options.angled_at(0)
+options.angledBetween(3.5, 80.5)
+```        
 
-myplacer = WordCram.placer do |scene| 
-	scene[:word]
-    scene[:wordIndex] 
-    scene[:wordsCount] 
-    scene[:wordImageWidth]      
-    scene[:wordImageHeight] 
-    scene[:fieldWidth] 
-    scene[:fieldHeight] 
-       
-    word = scene[:word]
-    field_width = scene[:fieldWidth] 
-    field_height = scene[:fieldHeight]
-    word_width = scene[:wordImageWidth]
-    word_height = scene[:wordImageHeight] 
+### Case
 
-    # Your placement algorithm:
-	# xScatter = (1-word.weight);
-    # x = map ( random (-xScatter, xScatter), -1, 1, 30, field_width - word_width - 30);
-    # y = (1-pow(word.weight, 0.25)) * (field_height - word_height) + 30;  
-   
-    {x, y}	
+``` ruby 
+options.case(:upper)
+options.case(:lower)
+options.case(:default)
+```            
+
+### Placers
+
+``` ruby      
+options.with_placer() do |scene|  
+  word = scene[:word]
+  field_width = scene[:field_width] 
+  field_height = scene[:field_height]
+  word_width = scene[:word_image_width]
+  word_height = scene[:word_image_height] 
+  
+  x = word.weight * (field_width - word_width)
+  y = word.weight * (field_height - word_height)
+        
+  PVector.new(x,y)        
 end
 
-WordCram.new(self) do |options|
-	options.from(web: 'http://en.wikipedia.org/wiki/Portable_Document_Format')    
-	options.from(html: '<html>...</html>')
-	options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    
-	options.from(file: 'text_file.txt')
-   
-	options.with_color(color(255, 0, 0))	
-	options.with_colors(color(255, 0, 0), color(0, 255, 0))
-	
-	options.with_fonts("LiberationSans", "TimesNewRoman")
-	options.with_font("LiberationSans")	
-	
-	options.sized_by_weight(mix: 1, max: 30)
-	options.sized_by_rank(mix: 1, max: 30)
-	
-	options.with_word_padding(10)
-	
-	options.angled_at(0)
-	options.angledBetween(3.5, 80.5) 
-	
-	options.case(:upper)
-    options.case(:lower)
-    options.case(:default)
-	
-	options.with_placer(myplacer)
-     
-	options.save_to('output.tiff')  
+options.with_placer(:horizontal_line)
+options.with_placer(:center_clump)
+options.with_placer(:horiz_band_anchored_left)
+options.with_placer(:swirl)
+options.with_placer(:upper_left)
+options.with_placer(:wave)        
+
+class my_placer
+
+	def place(word, index, count, word_width, word_height, field_width, field_height)
+		...your algorithm
+		x = ..
+		y = ..
+		return PVector.new(x,y)
+	end
 end
+
+options.with_placer(your_own_placer)
+
+```    
+
+### Saving the output to a file
+
+```
+options.save_to('output.tiff')
 ```
