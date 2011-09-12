@@ -90,7 +90,7 @@ git submodule init
 git submodule update
 ```
 
-Rename the file `spec/sample.rb.example` to `spec/sample.rb``and uncomment the lines that you want to test.
+Rename the file `spec/sample.rb.example` to `spec/sample.rb` and uncomment the lines that you want to test.
 
 ``` bash
 cp spec/sample.rb.example spec/sample.rb
