@@ -215,6 +215,26 @@ options.with_placer(MyPlacer.new)
 
 ### Saving the output to a file
 
-``` ruby
-options.save_to('output.tiff')
+
+``` ruby       
+
+require 'wordcram'   
+                           
+Processing::App::SKETCH_PATH = '.'
+class Sketch < Processing::App
+  
+  def setup    
+    size 350, 350
+    wordcram = Wordcram.new(self) do |options|    
+		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')    						
+    end     
+                                                                                                        
+	wordcram.draw_all
+  end                
+   
+  saveFrame('output.png')                                                                                             
+end     
+
+Sketch.new
+
 ```

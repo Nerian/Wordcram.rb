@@ -1,3 +1,12 @@
+
+# A Placer is a class that implements the interface Placer.
+# http://wordcram.googlecode.com/svn/javadoc/index.html?wordcram/WordPlacer.html  
+#
+# The interface defines just one method: __place__.
+#
+# The __place__ method defines an algorithm for positioning words.
+# The actual algorithm will be defined on initialization.   
+
 class Placer
   def initialize(&block)
     @block = block
@@ -18,8 +27,9 @@ class Placer
 end       
 
 
-class Wordcram  
-     
+class Wordcram 
+  
+  # There are a couple of Placers already bundled:      
   def horizontal_line
     Java.wordcram.Placers.horiz_line
   end

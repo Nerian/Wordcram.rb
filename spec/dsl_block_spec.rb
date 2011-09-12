@@ -44,7 +44,8 @@ class Sketch < Processing::App
       #options.with_placer(your_own_placer)             
       
       options.draw_all()      
-    end
+    end                     
+    saveFrame('output.png')
   end
   
   def draw

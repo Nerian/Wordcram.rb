@@ -15,7 +15,7 @@ module Sources
       when :html_string
         from_html_string(value)
       else
-        # TODO: Launch exception      
+        raise "Invalid Input. Options: :text_string, :text_file, :web_url, :html_file, :html_string"     
     end       
   end
   
