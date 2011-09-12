@@ -17,7 +17,7 @@ a straight API copy of the existing library. Abstract things away from the
 programmer so that working with your gem is easier than working directly with
 the library via JRuby. The code below is an example of what *not* to do.
 
-```ruby
+``` ruby
 session   = CrystalEnterprise.getSessionManager.logon(user, password, cms, authtype)
 infostore = session.getService('', 'InfoStore')
 ```
@@ -26,7 +26,7 @@ With a little bit of effort, this interaction could be made to feel a lot more
 natural to a native Rubyist. The code shown below is much closer to what you
 should be aiming for.
 
-```ruby
+``` ruby
 session   = Enterprise.connect(user: "shane", password: "password")
 infostore = session.infostore
 ```
@@ -78,7 +78,11 @@ Sketch.new
 
 ```       
 
-All modifiers are accessible as instance variables of the class Wordcram. You can use all the modifiers using the `options` variable that you get in the block.   
+All modifiers are accessible as instance variables of the class Wordcram. You can use all the modifiers using the `options` variable that you get in the block.        
+
+### Development 
+
+If you want to try out the features you can run the file `spec/dsl_block_spec.rb` and uncomment the features that you want.
 
 ### Sources   
 
@@ -89,11 +93,21 @@ options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')
 options.from(file: 'text_file.txt')
 ```        
 
-### Colors
+### Colors                                                           
 
-``` ruby  
-options.with_color(color(255, 0, 0))	
-options.with_colors(color(255, 0, 0), color(0, 255, 0))
+Word can have a color. Colors are defined in RGB format.
+
+``` ruby			
+
+color(__red__,__green__,__blue__)
+	
+red = color(255,0,0)
+         
+# Define the color of all words
+options.with_color(color(255,0,0))	
+
+# The words will have colors randomly picked from the list of colors. 
+options.with_colors(color(255, 0, 0), color(0, 255, 0), ...)
 ```   
 
 ### Fonts    
@@ -105,25 +119,34 @@ options.with_font("LiberationSans")
 
 ### Ranking the words
 
+The importance of a word is measured by how many times it appears in the __source__. You can set that more important words are bigger than the less important words using the following methods.
+
 ``` ruby
-options.sized_by_weight({mix: 1, max: 30})
+options.sized_by_weight({mix: 1, max: 30})     
+
 options.sized_by_rank({mix: 1, max: 30})
 ```                                
 
-### Padding
+### Padding    
+
+The minimum space between words.
 
 ``` ruby
 options.with_word_padding(10) 
 ```
                 
-### Angle
+### Angle  
+
+The angle of words.
 
 ``` ruby
 options.angled_at(0)
 options.angledBetween(3.5, 80.5)
 ```        
 
-### Case
+### Case   
+
+Whether they are all UPPER CASE, lower case, of default – no changes in the source.
 
 ``` ruby 
 options.case(:upper)
@@ -131,30 +154,52 @@ options.case(:lower)
 options.case(:default)
 ```            
 
-### Placers
+### Placers 
+
+Words are placed using an algorithm that takes into account different parameters. The code block is ran for each word.
 
 ``` ruby      
 options.with_placer() do |scene|  
-  word = scene[:word]
-  field_width = scene[:field_width] 
-  field_height = scene[:field_height]
-  word_width = scene[:word_image_width]
-  word_height = scene[:word_image_height] 
-  
-  x = word.weight * (field_width - word_width)
-  y = word.weight * (field_height - word_height)
-        
-  PVector.new(x,y)        
-end
+	... you algorithm goes here ...
+	x = ...
+	y = ...
+	# It must return a PVector, which set the position for that word.
+	PVector.new(x,y)        
+end          
+```     
+
+The __scene__ parameter in the block has the following information: 
+
+``` ruby                                                           
+
+scene[:word]
+scene[:word_index]
+scene[:words_count]
+scene[:word_image_width]
+scene[:word_image_height]
+scene[:field_width]
+scene[:field_height]
+
+```         
+
+There are a couple of Placers already defined.
+
+``` ruby
 
 options.with_placer(:horizontal_line)
 options.with_placer(:center_clump)
 options.with_placer(:horiz_band_anchored_left)
 options.with_placer(:swirl)
 options.with_placer(:upper_left)
-options.with_placer(:wave)        
+options.with_placer(:wave)  
 
-class my_placer
+```     
+
+If you are going to define a complex algorithm you may want to use a class. You need to implement a `place` method`.
+
+``` ruby      
+
+class MyPlacer
 
 	def place(word, index, count, word_width, word_height, field_width, field_height)
 		...your algorithm
@@ -164,12 +209,12 @@ class my_placer
 	end
 end
 
-options.with_placer(your_own_placer)
+options.with_placer(MyPlacer.new)
 
 ```    
 
 ### Saving the output to a file
 
-```
+``` ruby
 options.save_to('output.tiff')
 ```
