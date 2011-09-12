@@ -195,7 +195,7 @@ options.with_placer(:wave)
 
 ```     
 
-If you are going to define a complex algorithm you may want to use a class. You need to implement a `place` method`.
+If you are going to define a complex algorithm you may want to use a class. You need to implement a `place` method.
 
 ``` ruby      
 
