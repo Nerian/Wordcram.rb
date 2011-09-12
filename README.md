@@ -118,7 +118,8 @@ WordCram.new(self) do |options|
 	options.with_color(color(255, 0, 0))	
 	options.with_colors(color(255, 0, 0), color(0, 255, 0))
 	
-	options.with_fonts("LiberationSans")	
+	options.with_fonts("LiberationSans", "TimesNewRoman")
+	options.with_font("LiberationSans")	
 	
 	options.sized_by_weight(mix_size: 1, max_size: 200)
 	
