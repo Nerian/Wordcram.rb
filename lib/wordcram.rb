@@ -1,9 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
-require 'java'              
-require 'rubygems'   
-
-gem 'ruby-processing'   
+require 'java'                
+   
 require 'ruby-processing' 
 
 # Wordcram dependencies
