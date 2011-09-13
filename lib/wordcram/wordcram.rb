@@ -6,7 +6,7 @@ class Wordcram
   include Dsl
   attr_accessor :wordcram
   
-  def initialize(papplet) 
+  def initialize( papplet ) 
     @wordcram = Java.wordcram.WordCram.new(papplet)
     yield self if block_given?               
   end

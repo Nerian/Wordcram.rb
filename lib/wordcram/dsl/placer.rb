@@ -33,7 +33,7 @@ module Placer
     Java.wordcram.Placers.wave
   end    
   
-  def create_placer(name)
+  def create_placer( name )
     placer = ''
     case name
       when :horizontal_line
@@ -52,7 +52,7 @@ module Placer
     placer
   end         
   
-  def with_placer(placer=nil, &block)      
+  def with_placer( placer=nil, &block )      
     case placer
       when Symbol
         placer = create_placer(placer)
@@ -63,11 +63,11 @@ module Placer
   end
   
   class Placer
-    def initialize(&block)
+    def initialize( &block )
       @block = block
     end
 
-    def place(word, index, count, word_width, word_height, field_width, field_height)
+    def place( word, index, count, word_width, word_height, field_width, field_height )
       scene = {}
       scene[:word] = word
       scene[:word_index] = index

@@ -1,6 +1,6 @@
 module Sources 
 
-  def from(options = {} )
+  def from( options = {} )
     key = options.keys.first
     value = options.values.first
     case key
@@ -19,23 +19,23 @@ module Sources
     end       
   end
   
-  def from_text_string(text)                          
+  def from_text_string( text )                          
     @wordcram.from_text_string(text)
   end      
   
-  def from_web_page(url)
+  def from_web_page( url )
     @wordcram.from_web_page(url)    
   end
   
-  def from_html_file(path)
+  def from_html_file( path )
     @wordcram.from_html_file(path)    
   end                            
   
-  def from_html_string(html_string)
+  def from_html_string( html_string )
     @wordcram.from_html_string(html_string)    
   end                         
   
-  def from_text_file(path)                     
+  def from_text_file( path )                     
     @wordcram.from_text_file(path)        
   end
   
