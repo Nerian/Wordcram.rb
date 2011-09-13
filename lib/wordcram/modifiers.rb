@@ -3,13 +3,17 @@ module Modifiers
   #######################
   # Angler 
   #######################
-
-  def angled_at(angle)
-    wordcram.angled_at(angle)
-  end                        
-  
-  def angled_between(angle1, angle2)
-    wordcram.angled_between(angle1, angle2 )
+                      
+  def angled(options = {})
+    key = options.keys.first
+    value = options.values.first
+    
+    case key
+      when :at
+        wordcram.angled_at(value)
+      when key == :between or key == :and
+        wordcram.angled_between(options[:between], options[:and] )        
+    end         
   end
 
   #######################
@@ -24,32 +28,31 @@ module Modifiers
         wordcram.upper_case()
       when :default
         wordcram.keep_case()  
-      end    
+    end    
   end   
   
   #######################
   # Color 
   #######################
-  
-  
-  def with_color(color)
-    wordcram.with_color(color)
-  end
-  
-  def with_colors(*colors)                            
-    wordcram.with_colors(*colors)
+   
+  def with_colors(*colors)
+    if *colors.size == 1
+      wordcram.with_color(*colors)
+    else                         
+      wordcram.with_colors(*colors)
+    end      
   end     
   
   #######################
   # Font 
-  #######################
-    
-  def with_fonts(*fonts)
-    wordcram.with_fonts(*fonts)	
-  end  
+  #######################      
   
-  def with_font(fonts)
-    wordcram.with_font(fonts)	
+  def with_fonts(*fonts)
+    if *fonts.size == 1
+      wordcram.with_font(*fonts)
+    else                         
+      wordcram.with_fonts(*fonts)
+    end
   end   
   
   #######################

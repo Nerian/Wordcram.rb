@@ -72,23 +72,22 @@ options.from(file: 'text_file.txt')
 Word can have a color. Colors are defined in RGB format.
 
 ``` ruby			
-
 color(__red__,__green__,__blue__)
 	
-red = color(255,0,0)
-         
-# Define the color of all words
-options.with_color(color(255,0,0))	
-
-# The words will have colors randomly picked from the list of colors. 
-options.with_colors(color(255, 0, 0), color(0, 255, 0), ...)
+red = color(255,0,0)              
+                          
+# All words will have the same color
+options.with_colors(color(255,0,0))
+                                    
+# The words will have random color chosen between the arguments.
+options.with_colors(color(255,0,0), color(0, 255, 0), ...)	
 ```   
 
 ### Fonts    
 
 ``` ruby   
-options.with_fonts("LiberationSans", "TimesNewRoman")
-options.with_font("LiberationSans")
+options.with_fonts("LiberationSans")
+options.with_fonts("LiberationSans", "TimesNewRoman", ...)
 ```            
 
 ### Ranking the words
@@ -114,8 +113,8 @@ options.with_word_padding(10)
 The angle of words.
 
 ``` ruby
-options.angled_at(0)
-options.angledBetween(3.5, 80.5)
+options.angled(at: 0)
+options.angled({between: 0, and: 50})
 ```        
 
 ### Case   
