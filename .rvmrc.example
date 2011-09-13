@@ -1,3 +1,4 @@
+export JRUBY_OPTS=--1.9
 rvm use jruby
 rvm gemset create wordcram
 rvm gemset use wordcram
