@@ -82,7 +82,7 @@ All modifiers are accessible as instance variables of the class Wordcram. You ca
 
 ### Development 
 
-``` bash
+``` bash     
 git clone git@github.com:Nerian/s9-e1.git
 cd s9-e1.git/
 bundle install
@@ -92,8 +92,11 @@ git submodule update
 
 Rename the file `spec/sample.rb.example` to `spec/sample.rb` and uncomment the lines that you want to test.
 
-``` bash
+``` bash            
+export JRUBY_OPTS=--1.9
+
 cp spec/sample.rb.example spec/sample.rb
+
 jruby spec/sample.rb
 ```
 
