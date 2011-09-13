@@ -14,7 +14,8 @@ module Modifiers
       when key == :between or key == :and
         wordcram.angled_between(options[:between], options[:and] )        
     end         
-  end
+  end        
+  
 
   #######################
   # Case 
@@ -29,7 +30,8 @@ module Modifiers
       when :default
         wordcram.keep_case()  
     end    
-  end   
+  end        
+  
   
   #######################
   # Color 
@@ -42,6 +44,7 @@ module Modifiers
       wordcram.with_colors(*colors)
     end      
   end     
+            
   
   #######################
   # Font 
@@ -53,7 +56,8 @@ module Modifiers
     else                         
       wordcram.with_fonts(*fonts)
     end
-  end   
+  end       
+  
   
   #######################
   # Padding 
@@ -61,7 +65,8 @@ module Modifiers
   
   def with_word_padding(padding)
     wordcram.with_word_padding(padding)
-  end
+  end      
+  
   
   #######################
   # Sizer 
@@ -73,13 +78,13 @@ module Modifiers
   
   def sized_by_rank(options)
     wordcram.sized_by_rank(options[:min], options[:max])    
-  end     
+  end            
+  
   
   #######################
   # Sources 
   #######################
   
-
   def from(options = {})
     key = options.keys.first
     value = options.values.first
@@ -98,6 +103,7 @@ module Modifiers
         raise "Invalid Input. Options: :text_string, :text_file, :web_url, :html_file, :html_string"     
     end       
   end
+                   
   
   #########################
   # Placer
@@ -131,6 +137,7 @@ module Modifiers
      end
      wordcram.with_placer(placer)
    end
+            
   
   ##########################
   # Bundled Placers
