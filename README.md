@@ -113,8 +113,8 @@ options.with_word_padding(10)
 The angle of words.
 
 ``` ruby
-options.angled(at: 0)
-options.angled({between: 0, and: 50})
+options.angled_at(0)
+options.angled_between(0, 50)
 ```        
 
 ### Case   
