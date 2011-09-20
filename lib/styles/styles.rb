@@ -147,7 +147,7 @@ class Wordcram
 				  placer = upper_left
 			  when :wave
 				  placer = wave
-      end
+			end
 			placer
 		end
 
@@ -157,7 +157,7 @@ class Wordcram
 		  else
 		    placer = create_placer(placer)
 	    end
-	    wordcram.with_placer(placer)			
+	    wordcram.with_placer(placer)
 		end
 
 

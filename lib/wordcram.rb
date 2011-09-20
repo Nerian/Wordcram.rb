@@ -15,8 +15,8 @@ Processing::App::SKETCH_PATH = '.'
 
 # This is the main interface. The API that most users are going to use.
 
-class Wordcram 
-  VERSION = '0.1.0'
+class Wordcram
+	VERSION = '0.1.0'
 
 	def self.draw(&block)
 		Sketch.new(&block)
@@ -47,15 +47,15 @@ class Wordcram
 
 	end
 
-	class Placer 
+	class Placer
 		def initialize(&block)
 			@block = block
 		end
 
 		def place(data = {})
-      pos = @block.call(data)
-      Processing::PVector.new(pos[0],pos[1])
-    end          	 
+			pos = @block.call(data)
+			Processing::PVector.new(pos[0],pos[1])
+		end
 
 	end
 end
