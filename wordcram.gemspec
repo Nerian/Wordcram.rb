@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Gonzalo Rodriguez-Baltanas Diaz"]
   s.email       = 'siotopo@gmail.com'
   s.files = Dir['lib/**/*.rb'] + Dir['vendor/**/*']
-  s.require_paths = ["lib"]  
-  s.homepage    = 'https://github.com/Nerian/s9-e1'   
+  s.require_paths = ["lib"]
+  s.homepage    = 'https://github.com/Nerian/s9-e1'
   s.add_runtime_dependency 'ruby-processing'
 end

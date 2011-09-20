@@ -1,51 +1,51 @@
-require 'java'                
-   
-require 'ruby-processing' 
+require 'java'
+
+require 'ruby-processing'
 
 # Wordcram dependencies
 require_relative '../vendor/WordCram.jar'
 require_relative '../vendor/jsoup-1.3.3.jar'
 require_relative '../vendor/cue.language.jar'
-require_relative '../vendor/processing/core.jar'   
+require_relative '../vendor/processing/core.jar'
 require_relative '../vendor/processing/itext.jar'
-require_relative '../vendor/processing/pdf.jar'              
+require_relative '../vendor/processing/pdf.jar'
 
-require_relative 'styles/styles'     
+require_relative 'styles/styles'
 Processing::App::SKETCH_PATH = '.'
 
 # This is the main interface. The API that most users are going to use.
 
-class Wordcram       
+class Wordcram
 
-  def self.draw(&block) 
+  def self.draw(&block)
     Sketch.new(&block)
-  end  
-     
+  end
+
   class Sketch < Processing::App
     include Style
     attr_accessor :wordcram, :block
-    
+
     def initialize(&block)
       @block = block
-      super()            
+      super()
     end
-    
+
     def canvas(&block)
       yield self
-    end         
-       
-    def setup      
+    end
+
+    def setup
       @wordcram = Java.wordcram.WordCram.new(self)
       @block.call(self)
       @wordcram.draw_all()
-    end                    
-    
+    end
+
     def save_to(path)
       saveFrame(path)
-    end        
-    
+    end
+
   end
-  
+
   class Placer
     def initialize(&block)
       @block = block
@@ -56,12 +56,12 @@ class Wordcram
       scene[:word] = word
       scene[:word_index] = index
       scene[:words_count] = count
-      scene[:word_image_width] = word_width     
+      scene[:word_image_width] = word_width
       scene[:word_image_height] = word_height
       scene[:field_width] = field_width
-      scene[:field_height] = field_height 
-  	  
+      scene[:field_height] = field_height
+
       @block.call(scene)
     end
-  end                                                       
+  end
 end

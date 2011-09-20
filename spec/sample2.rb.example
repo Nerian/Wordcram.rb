@@ -1,5 +1,5 @@
 require_relative '../lib/wordcram'
-#require 'wordcram' # install the gem first.                             
+#require 'wordcram' # install the gem first.
 
 Wordcram.draw do |w|
   w.canvas do |c|
@@ -15,6 +15,6 @@ Wordcram.draw do |w|
   #fonts "LiberationSans", "TimesNewRoman"
 
   #places ->(){ # my custom placer }
-                       
+
   w.save_to('output.png')
 end

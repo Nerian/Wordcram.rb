@@ -10,7 +10,7 @@ Java library into a new Ruby gem. You can choose any Java library you like.
 However, if there already existing a functional and active gem, you should look
 at wrapping a different library unless you plan on taking a different route.
 Either way, please have Greg or Shane approve your chosen library before
-starting work in earnest. 
+starting work in earnest.
 
 Oh, and one more thing. We don't just want this to be
 a straight API copy of the existing library. Abstract things away from the

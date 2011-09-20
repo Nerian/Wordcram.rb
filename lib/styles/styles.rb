@@ -1,85 +1,85 @@
 class Wordcram
-  module Style  
+  module Style
 
     #######################
-    # Angler 
+    # Angler
     #######################
 
-    def angled_at(angle)    
+    def angled_at(angle)
       wordcram.angled_at(angle)
     end
 
     def angled_between(from, to)
-      wordcram.angled_between(from, to)        
-    end        
+      wordcram.angled_between(from, to)
+    end
 
 
     #######################
-    # Case 
+    # Case
     #######################
 
-    def case(option)  
+    def case(option)
       case option
       when :lower
         wordcram.lower_case()
       when :upper
         wordcram.upper_case()
       when :default
-        wordcram.keep_case()  
-      end    
-    end        
+        wordcram.keep_case()
+      end
+    end
 
 
     #######################
-    # Color 
+    # Color
     #######################
 
     def with_colors(*colors)
       if colors.size == 1
         wordcram.with_color(colors)
-      else                         
+      else
         wordcram.with_colors(colors)
-      end      
-    end     
+      end
+    end
 
 
     #######################
-    # Font 
-    #######################      
+    # Font
+    #######################
 
     def with_fonts(*fonts)
       if fonts.size == 1
         wordcram.with_font(fonts)
-      else                         
+      else
         wordcram.with_fonts(fonts)
       end
-    end       
+    end
 
 
     #######################
-    # Padding 
-    #######################  
+    # Padding
+    #######################
 
     def with_word_padding(padding)
       wordcram.with_word_padding(padding)
-    end      
+    end
 
 
     #######################
-    # Sizer 
-    #######################  
+    # Sizer
+    #######################
 
     def sized_by_weight(options)
-      wordcram.sized_by_weight(options[:min], options[:max])    
+      wordcram.sized_by_weight(options[:min], options[:max])
     end
 
     def sized_by_rank(options)
-      wordcram.sized_by_rank(options[:min], options[:max])    
-    end            
+      wordcram.sized_by_rank(options[:min], options[:max])
+    end
 
 
     #######################
-    # Sources 
+    # Sources
     #######################
 
     def from(content, options = {})
@@ -89,20 +89,20 @@ class Wordcram
         when :text_file
           wordcram.from_text_file(content)
         when :web_url
-          wordcram.from_web_page(content) 
+          wordcram.from_web_page(content)
         when :html_file
-          wordcram.from_html_file(content) 
+          wordcram.from_html_file(content)
         when :html_string
           wordcram.from_html_string(content)
         else
-          raise "Invalid Input. Options: :text, :text_file, :web_url, :html_file, :html_string"     
-      end       
+          raise "Invalid Input. Options: :text, :text_file, :web_url, :html_file, :html_string"
+      end
     end
 
 
     #########################
     # Placer
-    #########################  
+    #########################
 
     def create_placer(name)
       placer = ''
@@ -118,17 +118,17 @@ class Wordcram
       when :upper_left
         placer = upper_left
       when :wave
-        placer = wave    
-      end                    
+        placer = wave
+      end
       placer
-    end         
+    end
 
-    def with_placer(placer=nil, &block)      
+    def with_placer(placer=nil, &block)
       case placer
       when Symbol
         placer = create_placer(placer)
       when placer.nil?
-        placer = Placer.new &block 
+        placer = Placer.new &block
       end
       wordcram.with_placer(placer)
     end
@@ -136,7 +136,7 @@ class Wordcram
 
     ##########################
     # Bundled Placers
-    ##########################  
+    ##########################
 
     def horizontal_line
       Java.wordcram.Placers.horiz_line
@@ -144,11 +144,11 @@ class Wordcram
 
     def center_clump
       Java.wordcram.Placers.center_clump
-    end    
+    end
 
     def horiz_band_anchored_left
       Java.wordcram.Placers.horiz_band_anchored_left
-    end                 
+    end
 
     def swirl
       Java.wordcram.Placers.swirl
@@ -156,7 +156,7 @@ class Wordcram
 
     def upper_left
       Java.wordcram.Placers.upper_left
-    end                                
+    end
 
     def wave
       Java.wordcram.Placers.wave
