@@ -42,6 +42,14 @@ class Wordcram
       end
     end
 
+    def black
+      0x000000
+    end
+
+    def white
+      0xffffff
+    end
+
 
     #######################
     # Font

@@ -31,12 +31,12 @@ class Wordcram
     end
 
     def canvas(&block)
-      yield self
+      self.instance_eval(&block)
     end
 
     def setup
       @wordcram = Java.wordcram.WordCram.new(self)
-      @block.call(self)
+      self.instance_eval(&@block)
       @wordcram.draw_all()
     end
 
