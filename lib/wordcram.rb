@@ -16,58 +16,58 @@ Processing::App::SKETCH_PATH = '.'
 # This is the main interface. The API that most users are going to use.
 
 class Wordcram
-	VERSION = '0.1.0'
+  VERSION = '0.1.0'
 
-	def self.draw(&block)
-		Sketch.new(&block)
-	end
+  def self.draw(&block)
+    Sketch.new(&block)
+  end
 
-	class Sketch < Processing::App
-		include Style
-		attr_accessor :wordcram, :block
+  class Sketch < Processing::App
+    include Style
+    attr_accessor :wordcram, :block
 
-		def initialize(&block)
-			@block = block
-			super()
-		end
+    def initialize(&block)
+      @block = block
+      super()
+    end
 
-		def canvas(&block)
-			self.instance_eval(&block)
-		end
+    def canvas(&block)
+      self.instance_eval(&block)
+    end
 
-		def setup
-			@wordcram = Java.wordcram.WordCram.new(self)  
-			
-			self.instance_eval(&@block)
-			
-			@wordcram.draw_all()
-		end
+    def setup
+      @wordcram = Java.wordcram.WordCram.new(self)  
 
-		def save_to(path)
-			saveFrame(path)
-		end
+      self.instance_eval(&@block)
 
-	end
+      @wordcram.draw_all()
+    end
 
-	class Placer
-		def initialize(&block)
-			@block = block
-		end
+    def save_to(path)
+      saveFrame(path)
+    end
 
-		def place(word, index, count, word_width, word_height, field_width, field_height) 
-		  data = {}
-		  data[:word]         = word
-		  data[:index]        = index
-		  data[:count]        = count
-		  data[:word_width]   = word_width 
-		  data[:word_height]  = word_height
-		  data[:field_width]  = field_width
-		  data[:field_height] = field_height
-		  
-			pos = @block.call(data)
-			
-			Processing::PVector.new(pos[0], pos[1])
-		end
+  end
 
-	end
+  class Placer
+    def initialize(&block)
+      @block = block
+    end
+
+    def place(word, index, count, word_width, word_height, field_width, field_height) 
+      data = {}
+      data[:word]         = word
+      data[:index]        = index
+      data[:count]        = count
+      data[:word_width]   = word_width 
+      data[:word_height]  = word_height
+      data[:field_width]  = field_width
+      data[:field_height] = field_height
+
+      pos = @block.call(data)
+
+      Processing::PVector.new(pos[0], pos[1])
+    end
+
+  end
 end
