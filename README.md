@@ -57,34 +57,33 @@ jruby spec/sample.rb
 ### Sources
 
 ``` ruby
-from('http://en.wikipedia.org/wiki/Portable_Document_Format', :as => :web_page)
+from('http://en.wikipedia.org/wiki/Portable_Document_Format', :as => :web_page)   
+
 from('<html>...</html>', :as => :html_string)
+
 from('Lorem ipsum dolor sit amet, consectetur adipisicing elit', :as => :text_string)
+
 from('text_file.txt', :as => :text_file)
-from('page.html', :as => :html_file)
+
+from('page.html', :as => :html_file)            
+
 ```
 
 ### Colors
 
-Word can have a color. Colors are defined in RGB format.
+Words can be colored
 
 ``` ruby
-color(__red__,__green__,__blue__)
+colors(black, red, green, blue)      
 
-red = color(255,0,0)
-
-# All words will have the same color
-options.with_colors(color(255,0,0))
-
-# The words will have random color chosen between the arguments.
-options.with_colors(color(255,0,0), color(0, 255, 0), ...)
 ```
 
 ### Fonts
 
 ``` ruby
-options.with_fonts("LiberationSans")
-options.with_fonts("LiberationSans", "TimesNewRoman", ...)
+fonts("LiberationSans")
+fonts("LiberationSans", "TimesNewRoman", ...) 
+
 ```
 
 ### Ranking the words
@@ -92,9 +91,10 @@ options.with_fonts("LiberationSans", "TimesNewRoman", ...)
 The importance of a word is measured by how many times it appears in the __source__. You can set that more important words are bigger than the less important words using the following methods.
 
 ``` ruby
-options.sized_by_weight({mix: 1, max: 30})
+sized_by_weight({mix: 1, max: 30})
 
-options.sized_by_rank({mix: 1, max: 30})
+sized_by_rank({mix: 1, max: 30})   
+
 ```
 
 ### Padding
@@ -102,7 +102,8 @@ options.sized_by_rank({mix: 1, max: 30})
 The minimum space between words.
 
 ``` ruby
-options.with_word_padding(10)
+word_padding(10)  
+
 ```
 
 ### Angle
@@ -110,8 +111,9 @@ options.with_word_padding(10)
 The angle of words.
 
 ``` ruby
-options.angled_at(0)
-options.angled_between(0, 50)
+angled_at(0)
+angled_between(0, 50) 
+
 ```
 
 ### Case
@@ -119,9 +121,10 @@ options.angled_between(0, 50)
 Whether they are all UPPER CASE, lower case, of default – no changes in the source.
 
 ``` ruby
-options.case(:upper)
-options.case(:lower)
-options.case(:default)
+case(:upper)
+case(:lower)
+case(:default)    
+
 ```
 
 ### Placers
@@ -129,82 +132,78 @@ options.case(:default)
 Words are placed using an algorithm that takes into account different parameters. The code block is ran for each word.
 
 ``` ruby
-options.with_placer() do |scene|
-	... you algorithm goes here ...
-	x = ...
-	y = ...
-	# It must return a PVector, which set the position for that word.
-	PVector.new(x,y)
-end
+placer { |data|   
+	x = data[:word].weight *  (data[:field_width] - data[:word_width])
+	y = data[:word].weight * (data[:field_height] - data[:word_height])
+	[x, y] }        
+	
 ```
-
-The __scene__ parameter in the block has the following information:
+This is the information available inside that block.
 
 ``` ruby
-
-scene[:word]
-scene[:word_index]
-scene[:words_count]
-scene[:word_image_width]
-scene[:word_image_height]
-scene[:field_width]
-scene[:field_height]
+data[:word]
+data[:index]
+data[:count]
+data[:word_width]
+data[:word_height]
+data[:field_width]
+data[:field_height]
 
 ```
 
 There are a couple of Placers already defined.
 
-``` ruby
-
-options.with_placer(:horizontal_line)
-options.with_placer(:center_clump)
-options.with_placer(:horiz_band_anchored_left)
-options.with_placer(:swirl)
-options.with_placer(:upper_left)
-options.with_placer(:wave)
+``` ruby       
+placer(:horizontal_line)
+placer(:center_clump)
+placer(:horiz_band_anchored_left)
+placer(:swirl)
+placer(:upper_left)
+placer(:wave)
 
 ```
 
-If you are going to define a complex algorithm you may want to use a class. You need to implement a `place` method.
+### Full example
+
 
 ``` ruby
+require_relative '../lib/wordcram'
+#require 'wordcram' # install the gem first.
 
-class MyPlacer
-
-	def place(word, index, count, word_width, word_height, field_width, field_height)
-		...your algorithm
-		x = ..
-		y = ..
-		return PVector.new(x,y)
+Wordcram.draw do
+	canvas do
+		size 700, 700
+		background black
 	end
-end
 
-options.with_placer(MyPlacer.new)
+	from('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+	  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+	  qui officia deserunt mollit anim id est laborum', :as => :text)
 
-```
+	colors(blue, green, yellow, red)
 
-### Saving the output to a file
+	fonts "LiberationSans"
 
+	sized_by_weight({:mix => 30, :max => 35})
 
-``` ruby
+	word_padding 10
 
-require 'wordcram'
+	angled_at 70
+	angled_between 70, 90
 
-Processing::App::SKETCH_PATH = '.'
-class Sketch < Processing::App
+	text_case :upper
+	text_case :lower
+	text_case :default
 
-  def setup
-    size 350, 350
-    wordcram = Wordcram.new(self) do |options|
-		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')
-    end
-
-	wordcram.draw_all
-  end
-
-  saveFrame('output.png')
-end
-
-Sketch.new
+	placer { |data|   
+    	x = data[:word].weight *  (data[:field_width] - data[:word_width])
+    	y = data[:word].weight * (data[:field_height] - data[:word_height])
+    [x, y] }
+ 
+	save_to('output.png')
+end                      
 
 ```
