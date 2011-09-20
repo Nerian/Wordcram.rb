@@ -16,8 +16,8 @@ class Wordcram
 
     #######################
     # Case
-    ####################### 
-    
+    #######################
+
     def text_case(option)
       wordcram.send :"#{option}_case"
     rescue NoMethodError
@@ -110,12 +110,12 @@ class Wordcram
     rescue NoMethodError
       wordcram.send(:from_text_string, content)
     end
-       
+
 
     #########################
     # Placer
-    #########################   
-    
+    #########################
+
     def create_placer(name)
       placer = send(name)
     rescue NoMethodError

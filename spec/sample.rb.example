@@ -29,7 +29,7 @@ Wordcram.draw do
 	text_case :lower
 	text_case :default
 
-	placer { |data|   
+	placer { |data|
     x = data[:word].weight *  (data[:field_width] - data[:word_width])
     y = data[:word].weight * (data[:field_height] - data[:word_height])
     [x, y] }
@@ -40,6 +40,6 @@ Wordcram.draw do
 	placer(:swirl)
 	placer(:upper_left)
 	placer(:wave)
- 
+
 	save_to('output.png')
 end

@@ -13,7 +13,7 @@ class Wordcram
     end
 
     def setup
-      @wordcram = Java.wordcram.WordCram.new(self)  
+      @wordcram = Java.wordcram.WordCram.new(self)
 
       self.instance_eval(&@block)
 
@@ -24,5 +24,5 @@ class Wordcram
       saveFrame(path)
     end
 
-  end  
+  end
 end
