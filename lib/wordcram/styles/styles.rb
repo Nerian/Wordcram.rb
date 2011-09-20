@@ -130,25 +130,12 @@ class Wordcram
 
     #########################
     # Placer
-    #########################
-
+    #########################   
+    
     def create_placer(name)
+      placer = send(name)
+    rescue NoMethodError
       placer = ''
-      case name
-      when :horizontal_line
-        placer = horizontal_line
-      when :center_clump
-        placer = center_clump
-      when :horiz_band_anchored_left
-        placer = horiz_band_anchored_left
-      when :swirl
-        placer = swirl
-      when :upper_left
-        placer = upper_left
-      when :wave
-        placer = wave
-      end
-      placer
     end
 
     def placer(placer=nil, &block)
