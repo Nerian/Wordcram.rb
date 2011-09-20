@@ -5,3 +5,4 @@ dirty.rb
 .rvmrc
 spec/sample.rb
 wordcram-0.1.0.gem
+Gemfile.lock
