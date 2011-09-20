@@ -10,22 +10,41 @@ require_relative '../vendor/processing/core.jar'
 require_relative '../vendor/processing/itext.jar'
 require_relative '../vendor/processing/pdf.jar'              
 
-require_relative 'styles/styles'
+require_relative 'styles/styles'     
+Processing::App::SKETCH_PATH = '.'
 
 # This is the main interface. The API that most users are going to use.
 
-class Wordcram  
-  include Style
-  attr_accessor :wordcram
-  
-  def initialize(papplet)
-    @wordcram = Java.wordcram.WordCram.new(papplet)
-    yield self if block_given?               
+class Wordcram       
+
+  def self.draw(&block) 
+    Sketch.new(&block)
+  end  
+     
+  class Sketch < Processing::App
+    include Style
+    attr_accessor :wordcram, :block
+    
+    def initialize(&block)
+      @block = block
+      super()            
+    end
+    
+    def canvas(&block)
+      yield self
+    end         
+       
+    def setup      
+      @wordcram = Java.wordcram.WordCram.new(self)
+      @block.call(self)
+      @wordcram.draw_all()
+    end                    
+    
+    def save_to(path)
+      saveFrame(path)
+    end        
+    
   end
-  
-  def draw_all()  
-    wordcram.draw_all()    
-  end      
   
   class Placer
     def initialize(&block)

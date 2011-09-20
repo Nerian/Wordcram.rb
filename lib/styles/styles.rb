@@ -82,22 +82,20 @@ class Wordcram
     # Sources 
     #######################
 
-    def from(options = {})
-      key = options.keys.first
-      value = options.values.first
-      case key
-      when :text_string
-        wordcram.from_text_string(value)
-      when :text_file
-        wordcram.from_text_file(value)
-      when :web_url
-        wordcram.from_web_page(value) 
-      when :html_file
-        wordcram.from_html_file(value) 
-      when :html_string
-        wordcram.from_html_string(value)
-      else
-        raise "Invalid Input. Options: :text_string, :text_file, :web_url, :html_file, :html_string"     
+    def from(content, options = {})
+      case options[:as]
+        when :text
+          wordcram.from_text_string(content)
+        when :text_file
+          wordcram.from_text_file(content)
+        when :web_url
+          wordcram.from_web_page(content) 
+        when :html_file
+          wordcram.from_html_file(content) 
+        when :html_string
+          wordcram.from_html_string(content)
+        else
+          raise "Invalid Input. Options: :text, :text_file, :web_url, :html_file, :html_string"     
       end       
     end
 

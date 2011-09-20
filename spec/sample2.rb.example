@@ -1,0 +1,20 @@
+require_relative '../lib/wordcram'
+#require 'wordcram' # install the gem first.                             
+
+Wordcram.draw do |w|
+  w.canvas do |c|
+    c.size 700, 700
+    background black
+  end
+
+  w.from "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+       :as => :text
+
+  #colors red, green, blue
+
+  #fonts "LiberationSans", "TimesNewRoman"
+
+  #places ->(){ # my custom placer }
+                       
+  w.save_to('output.png')
+end
