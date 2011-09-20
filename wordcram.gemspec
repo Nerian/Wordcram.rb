@@ -1,6 +1,7 @@
+require_relative 'lib/wordcram'
 Gem::Specification.new do |s|
   s.name        = 'wordcram'
-  s.version     = '0.1.0'
+  s.version     = Wordcram::VERSION
   s.date        = '2011-09-13'
   s.summary     = "Create cool Word Clouds programatically"
   s.description = "A wrapper for the WordCram java library"

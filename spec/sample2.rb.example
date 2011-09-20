@@ -14,35 +14,9 @@ Wordcram.draw do
 	  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
 	  qui officia deserunt mollit anim id est laborum', :as => :text)
 
-	colors(blue, green, yellow, red)
-
-	fonts "LiberationSans"
-
-	sized_by_weight({:mix => 30, :max => 35})
-	sized_by_rank({:mix => 30, :max => 35})
-
-	word_padding 10
-
-	angled_at 70
-	angled_between 70, 90
-
-	text_case :upper
-	text_case :lower
-	text_case :default
-
 	placer() {     
     x = word.weight *  (field_width - word_width)
     y = word.weight * (field_height - word_height)
 	  [x, y] 
   }
-	#placer(:horizontal_line)
-	#placer(:center_clump)
-	#placer(:horiz_band_anchored_left)
-	#placer(:swirl)
-	#placer(:upper_left)
-	#placer(:wave)
-
-	#places ->(){ # my custom placer }
-
-	#save_to('output.png')
 end
