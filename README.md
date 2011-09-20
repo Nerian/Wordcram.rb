@@ -13,30 +13,26 @@ Create awesome word clouds!
 
 The word cloud is made of a __list of words__, a __canvas__ where these words are drawn and __modifiers__.
 
-This is the simplest word cloud. It takes as a source of words a string.
+This is the simplest word cloud. It takes as a source of words a string and save the image.
 
-``` ruby
-
+``` ruby  
 require 'wordcram'
 
-Processing::App::SKETCH_PATH = '.'
-class Sketch < Processing::App
+Wordcram.draw do
+	canvas do
+		size 700, 700
+	end
 
-  def setup
-    size 350, 350
-    wordcram = Wordcram.new(self) do |options|
-		options.from(:text_string => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')
-    end
+	from('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+	  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+	  qui officia deserunt mollit anim id est laborum', :as => :text)
 
-	wordcram.draw_all
-  end
+	save_to('output.png')
 end
-
-Sketch.new
-
 ```
-
-All modifiers are accessible as instance variables of the class Wordcram. You can use all the modifiers using the `options` variable that you get in the block.
 
 ### Development
 
@@ -61,10 +57,11 @@ jruby spec/sample.rb
 ### Sources
 
 ``` ruby
-options.from(web: 'http://en.wikipedia.org/wiki/Portable_Document_Format')
-options.from(html: '<html>...</html>')
-options.from(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit')
-options.from(file: 'text_file.txt')
+from('http://en.wikipedia.org/wiki/Portable_Document_Format', :as => :web_page)
+from('<html>...</html>', :as => :html_string)
+from('Lorem ipsum dolor sit amet, consectetur adipisicing elit', :as => :text_string)
+from('text_file.txt', :as => :text_file)
+from('page.html', :as => :html_file)
 ```
 
 ### Colors

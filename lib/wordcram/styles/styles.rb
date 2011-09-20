@@ -16,17 +16,12 @@ class Wordcram
 
     #######################
     # Case
-    #######################
-
+    ####################### 
+    
     def text_case(option)
-      case option
-      when :lower
-        wordcram.lower_case()
-      when :upper
-        wordcram.upper_case()
-      when :default
-        wordcram.keep_case()
-      end
+      wordcram.send :"#{option}_case"
+    rescue NoMethodError
+      wordcram.keep_case
     end
 
 
@@ -111,22 +106,11 @@ class Wordcram
     #######################
 
     def from(content, options = {})
-      case options[:as]
-      when :text
-        wordcram.from_text_string(content)
-      when :text_file
-        wordcram.from_text_file(content)
-      when :web_url
-        wordcram.from_web_page(content)
-      when :html_file
-        wordcram.from_html_file(content)
-      when :html_string
-        wordcram.from_html_string(content)
-      else
-        wordcram.from_text_string(content)
-      end
+      wordcram.send(:"from_#{options[:as]}", content)
+    rescue NoMethodError
+      wordcram.send(:from_text_string, content)
     end
-
+       
 
     #########################
     # Placer
