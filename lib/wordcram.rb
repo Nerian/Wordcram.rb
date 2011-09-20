@@ -17,51 +17,43 @@ Processing::App::SKETCH_PATH = '.'
 
 class Wordcram
 
-  def self.draw(&block)
-    Sketch.new(&block)
-  end
+	def self.draw(&block)
+		Sketch.new(&block)
+	end
 
-  class Sketch < Processing::App
-    include Style
-    attr_accessor :wordcram, :block
+	class Sketch < Processing::App
+		include Style
+		attr_accessor :wordcram, :block
 
-    def initialize(&block)
-      @block = block
-      super()
-    end
+		def initialize(&block)
+			@block = block
+			super()
+		end
 
-    def canvas(&block)
-      self.instance_eval(&block)
-    end
+		def canvas(&block)
+			self.instance_eval(&block)
+		end
 
-    def setup
-      @wordcram = Java.wordcram.WordCram.new(self)
-      self.instance_eval(&@block)
-      @wordcram.draw_all()
-    end
+		def setup
+			@wordcram = Java.wordcram.WordCram.new(self)
+			self.instance_eval(&@block)
+			@wordcram.draw_all()
+		end
 
-    def save_to(path)
-      saveFrame(path)
-    end
+		def save_to(path)
+			saveFrame(path)
+		end
 
-  end
+	end
 
-  class Placer
-    def initialize(&block)
-      @block = block
-    end
+	class Placer
+		def initialize(&block)
+			@block = block
+		end
 
-    def place(word, index, count, word_width, word_height, field_width, field_height)
-      scene = {}
-      scene[:word] = word
-      scene[:word_index] = index
-      scene[:words_count] = count
-      scene[:word_image_width] = word_width
-      scene[:word_image_height] = word_height
-      scene[:field_width] = field_width
-      scene[:field_height] = field_height
-
-      @block.call(scene)
-    end
-  end
+		def place(word, index, count, word_width, word_height, field_width, field_height)
+      pos = self.instance_eval(&@block)
+      PVector.new(pos[0],pos[1])
+		end
+	end
 end
