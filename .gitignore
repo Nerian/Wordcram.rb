@@ -7,3 +7,4 @@ spec/sample.rb
 wordcram-0.1.0.gem
 Gemfile.lock
 output.png
+examples/sample.rb
