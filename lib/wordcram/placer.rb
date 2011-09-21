@@ -3,7 +3,9 @@ class Wordcram
     def initialize(&block)
       @block = block
     end
-
+            
+    # This method is called from the java side, so I can't make the arguments
+    # a hash key. Blame Java T_T
     def place(word, index, count, word_width, word_height, field_width, field_height)
       data = {}
       data[:word]         = word
