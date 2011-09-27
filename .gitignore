@@ -4,7 +4,7 @@ samples
 dirty.rb
 .rvmrc
 spec/sample.rb
-wordcram-0.1.0.gem
+*.gem
 Gemfile.lock
 output.png
 examples/sample.rb

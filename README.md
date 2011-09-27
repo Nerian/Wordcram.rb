@@ -32,7 +32,14 @@ Wordcram.draw do
 
 	save_to('output.png')
 end
+```  
+
+### Install
+
+``` bash
+gem install wordcram
 ```
+
 
 ### Development
 
