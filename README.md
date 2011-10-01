@@ -174,8 +174,7 @@ placer(:wave)
 
 
 ``` ruby
-require_relative '../lib/wordcram'
-#require 'wordcram' # install the gem first.
+#require 'wordcram'
 
 Wordcram.draw do
 	canvas do
