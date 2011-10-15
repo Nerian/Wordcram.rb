@@ -1,6 +1,8 @@
 # Wordcram wrapper
 
-http://wordcram.org/
+https://github.com/Nerian/Wordcram.rb
+
+Java library: http://wordcram.org/
 
 Create awesome word clouds!
 
