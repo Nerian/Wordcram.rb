@@ -46,14 +46,14 @@ gem install wordcram
 ### Development
 
 ``` bash
-git clone git@github.com:Nerian/s9-e1.git
+git clone --recursive git@github.com:Nerian/s9-e1.git
 cd s9-e1.git/
 bundle install
-git submodule init
-git submodule update
 ```
 
-Rename the file `spec/sample.rb.example` to `spec/sample.rb` and uncomment the lines that you want to test.
+We provide an .rvm file. Just rename `.rvmrc.example` to `.rvmrc`
+
+Examples in `spec/sample.rb.example`. Rename it to `spec/sample.rb` and uncomment the lines of your interest
 
 ``` bash
 export JRUBY_OPTS=--1.9
